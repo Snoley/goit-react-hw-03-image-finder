@@ -8,6 +8,8 @@ import {
   SearchFormInput,
 } from './Searchbar.Styled';
 import Notiflix from 'notiflix';
+
+
 Notiflix.Notify.init({
   width: '320px',
   position: 'center-top',
@@ -32,6 +34,7 @@ export class Searchbar extends Component {
       Notiflix.Notify.warning('Enter a search parameter');
     } else this.props.onSearch(this.state.value);
     this.setState({ value: '' });
+    e.target.reset();
   };
 
   render() {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Searchbar } from './Searchbar';
-import ImageGallery from './ImageGallery';
-import Button from './Button';
-import { GlobalStyle } from './GlobalStyle';
-import { getPhoto } from './getPhoto';
-import { Wrapper } from './Wrapper';
+import { Searchbar } from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Button from './Button/Button';
+import { GlobalStyle } from './GlobalStyle/GlobalStyle';
+import { getPhoto } from '../API/getPhoto';
+import { Wrapper } from './Wrapper/Wrapper';
 import { animateScroll as scroll } from 'react-scroll';
 import Notiflix from 'notiflix';
 

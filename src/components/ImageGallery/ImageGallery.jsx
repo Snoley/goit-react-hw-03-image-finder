@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageGalleryItem from './ImageGalleryItem';
-import Loader from './Loader';
+import Loader from '../Loader/Loader';
 import { ImageGalleryLi } from './ImageGallery.Styled';
 
 function ImageGallery({ status, error, gallery }) {
