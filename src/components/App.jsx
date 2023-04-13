@@ -63,15 +63,34 @@ export class App extends Component {
     this.setState({ page: page + 1 });
   };
 
-  onSearch = searchParameter => {
+  query = searchParameter => {
+    if (this.state.searchParameter === searchParameter) {
+      return Notiflix.Notify.warning('You made the same request');
+    }
     this.setState({
-      searchParameter,
-      gallery: [],
+      searchParameter: searchParameter,
       page: 1,
-      status: 'stoped',
+      gallery: [],
       showBtn: false,
+      status: 'stoped',
     });
   };
+
+  // searchQuery = inputValue => {
+  //   if (this.state.query === inputValue) {
+  //     return toastInfoMessage('You made the same request');
+  //   }
+  //   this.setState({
+  //     query: inputValue,
+  //     page: 1,
+  //     gallery: [],
+  //     isVisible: false,
+  //     loading: false,
+  //     currentPerPage: null,
+  //     error: null,
+  //     largeImageURL: '',
+  //   });
+  // };
 
   render() {
     const { searchParameter, gallery, status, error, showBtn } = this.state;
@@ -79,7 +98,7 @@ export class App extends Component {
       <Wrapper>
         <GlobalStyle />
 
-        <Searchbar onSearch={this.onSearch} />
+        <Searchbar query={this.query} />
 
         {searchParameter ? (
           <ImageGallery gallery={gallery} status={status} error={error} />

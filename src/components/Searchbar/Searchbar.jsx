@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import {
   SearchbarHead,
@@ -20,30 +21,35 @@ Notiflix.Notify.init({
 
 export class Searchbar extends Component {
   state = {
-    value: '',
+    query: '',
   };
 
   handleChange = event => {
-    const newSearch = event.target.value;
-    this.setState({ value: newSearch });
+    this.setState({ query:  event.currentTarget.value.trimLeft()});
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    if (!this.state.value) {
-      Notiflix.Notify.warning('Enter a search parameter');
-    } else this.props.onSearch(this.state.value);
-    this.setState({ value: '' });
-    e.target.reset();
+  handleSubmit = event => {
+    const { query } = this.state;
+    event.preventDefault();
+
+
+    if (query === '') {
+      Notiflix.Notify.warning('You made the same request');
+      return;
+    }
+    this.props.query(query);
+    this.setState({ query: '' });
   };
+
+
 
   render() {
-    const { query } = this.state;
+    const { input } = this.state;
 
     return (
       <SearchbarHead>
         <SearchForm onSubmit={this.handleSubmit} className="SearchForm">
-          <SearchFormBtn type="submit">
+          <SearchFormBtn type="submit" >
             <FaSearch
               style={{
                 height: '30px',
@@ -59,7 +65,7 @@ export class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={query}
+            value={input}
             onChange={this.handleChange}
           />
         </SearchForm>
@@ -67,3 +73,7 @@ export class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
